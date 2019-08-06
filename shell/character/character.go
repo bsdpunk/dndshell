@@ -3,6 +3,7 @@ package main
 import "fmt"
 import "./class"
 import "./race"
+import "./inv"
 
 var Class = class.Class
 
@@ -12,11 +13,13 @@ type Character struct {
 	//Characther's Name
 	CharacterName string
 	//Class
-	CharacterClass Class
+	CharacterClass Class.Classes
 	//Race
 	CharacerRace race.Race
 	// Ability Scores
 	AbilityScores AS
+	// Ability Mods
+	AbilityMods Mods
 	//Actions
 	Actions     int
 	BonusAction int
@@ -24,6 +27,24 @@ type Character struct {
 	HitPoints int
 	//Armor
 	ArmorClass int
+	//Inventory
+	Inventory inv.Inventory
+	//Initiative
+	Initiative int
+	//
+}
+
+func InteractiveCreateCharacter(c Character) {
+
+	reader := bufio.NewReader(os.Stdin)
+	//fmt.Println(urlStr)
+	fmt.Print("Name$ ")
+	Name, _ := reader.ReadString('\n')
+	Name = strings.Replace(Name, "\n", "", -1)
+	c.PlayerName = Name
+	fmt.Println(c)
+	return
+
 }
 
 type AS struct {
@@ -34,7 +55,11 @@ type AS struct {
 	Constitution int
 	Charisma     int
 }
-
-func main() {
-	fmt.Println("vim-go")
+type Mods struct {
+	StrengthMod     int
+	DexterityMod    int
+	IntelligenceMod int
+	WisdomMod       int
+	ConstitutionMod int
+	CharismaMod     int
 }
