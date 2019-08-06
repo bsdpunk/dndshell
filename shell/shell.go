@@ -2,6 +2,7 @@ package shell
 
 import (
 	"./commands"
+	"./dice"
 	"./general"
 	"fmt"
 	"github.com/gobs/readline"
@@ -27,6 +28,14 @@ var coms = commands.Commands{
 		Usage:     "Clear the screen",
 		Action:    general.Clear,
 		Category:  "general",
+	},
+	{
+		Name:         "Dice",
+		ShortName:    "d",
+		Usage:        "3d6: rolls 3 6 sided dice ",
+		SubCommands:  dice.DiceSubs,
+		StringAction: dice.GetDice,
+		Category:     "general",
 	},
 }
 
@@ -64,10 +73,6 @@ func Shell() {
 	for _, c := range coms {
 		list = append(list, c.Name)
 		list = append(list, c.ShortName)
-		//		for _, s := range c.SubCommands {
-		//			list = append(list, s.Name)
-		//			list = append(list, s.ShortName)
-		//		}
 	}
 
 	prompt := "> "
@@ -86,14 +91,19 @@ L:
 		input := *result
 		words := strings.Fields(input)
 		if len(words) > 0 {
-			if coms.HasCommand(words[0]) && len(words) < 2 {
+			if coms.HasCommand(words[0]) && len(words) == 1 {
 				cmd := coms.NameIs(words[0])
-				cmd.Action()
+				if len(cmd.SubCommands) == 0 {
+					cmd.Action()
+				}
 			} else if coms.HasCommand(words[0]) && len(words) == 2 {
 				for _, i := range coms {
 					if i.SubCommands.HasCommand(words[1]) {
 						cmd := i.SubCommands.NameIs(words[1])
 						cmd.Action()
+					} else {
+						cmd := coms.NameIs(words[0])
+						cmd.StringAction(words[1])
 					}
 				}
 			}

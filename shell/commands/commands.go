@@ -9,6 +9,8 @@ type Command struct {
 	Usage string
 	// Launced Function on command
 	Action func()
+	// Action With String Argument
+	StringAction func(s string)
 	// Category of command
 	Category string
 	// List of child commands
