@@ -90,21 +90,17 @@ L:
 
 		input := *result
 		words := strings.Fields(input)
-		if len(words) > 0 {
-			if coms.HasCommand(words[0]) && len(words) == 1 {
-				cmd := coms.NameIs(words[0])
+		if len(words) > 0 && coms.HasCommand(words[0]) {
+			cmd := coms.NameIs(words[0])
+			if len(words) == 1 {
 				if len(cmd.SubCommands) == 0 {
 					cmd.Action()
 				}
-			} else if coms.HasCommand(words[0]) && len(words) == 2 {
-				for _, i := range coms {
-					if i.SubCommands.HasCommand(words[1]) {
-						cmd := i.SubCommands.NameIs(words[1])
-						cmd.Action()
-					} else {
-						cmd := coms.NameIs(words[0])
-						cmd.StringAction(words[1])
-					}
+			} else {
+				if cmd.SubCommands.HasCommand(words[1]) {
+					cmd.Action()
+				} else {
+					cmd.StringAction(words[1])
 				}
 			}
 		}

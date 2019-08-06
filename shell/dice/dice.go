@@ -50,7 +50,6 @@ func GetDice(arg string) {
 		random := rand.Intn(d.Type)
 		d.Amount[i] = random + 1
 		d.Total = d.Total + d.Amount[i]
-		fmt.Println(d)
 	}
 	fmt.Println(d.Total)
 	return
