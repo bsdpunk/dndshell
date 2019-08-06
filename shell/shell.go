@@ -83,8 +83,7 @@ func Shell() {
 		list = append(list, c.Name)
 		list = append(list, c.ShortName)
 	}
-	cs := character.Load()
-	fmt.Println(cs)
+	//	cs := character.LoadClasses()
 	prompt := "> "
 	matches = make([]string, 0, len(list))
 L:

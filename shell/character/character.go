@@ -54,7 +54,7 @@ func InteractiveCreateCharacter() {
 
 }
 
-func Load() (cs class.Classes) {
+func LoadClasses() (cs class.Classes) {
 	jsonFile, err := os.Open("./json/classes.json")
 
 	if err != nil {
@@ -66,6 +66,5 @@ func Load() (cs class.Classes) {
 	byteValue, _ := ioutil.ReadAll(jsonFile)
 
 	json.Unmarshal(byteValue, &cs)
-	fmt.Println(cs)
 	return cs
 }
