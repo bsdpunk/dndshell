@@ -1,4 +1,4 @@
-package classes
+package class
 
 type Class struct {
 	ClassLevels        ClassLevels          `json:"class_levels"`
@@ -44,5 +44,5 @@ type Subclasses struct {
 }
 
 type Classes struct {
-	classes []Class
+	Classes []Class `json:"classes"`
 }

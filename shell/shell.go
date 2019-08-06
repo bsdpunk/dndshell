@@ -2,6 +2,7 @@ package shell
 
 import (
 	"./character"
+	//	class "./character/class"
 	"./commands"
 	"./dice"
 	"./general"
@@ -82,7 +83,8 @@ func Shell() {
 		list = append(list, c.Name)
 		list = append(list, c.ShortName)
 	}
-
+	cs := character.Load()
+	fmt.Println(cs)
 	prompt := "> "
 	matches = make([]string, 0, len(list))
 L:

@@ -1,4 +1,4 @@
-package Race
+package race
 
 type Race struct {
 	AbilityBonusOptions        AbilityBonusOptions        `json:"ability_bonus_options"`

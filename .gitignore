@@ -1,1 +1,2 @@
-dummys.json
+*.json
+json/*

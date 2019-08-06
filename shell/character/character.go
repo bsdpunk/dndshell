@@ -1,13 +1,16 @@
 package character
 
-import "fmt"
-import "./class"
-import "./race"
-import "./inv"
-import "bufio"
-import "os"
-import "strings"
-import "encoding/json"
+import (
+	"./ability"
+	"./class"
+	"./race"
+	"bufio"
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"os"
+	"strings"
+)
 
 type Character struct {
 	//Player's Name
@@ -19,9 +22,7 @@ type Character struct {
 	//Race
 	CharacerRace race.Race
 	// Ability Scores
-	AbilityScores AS
-	// Ability Mods
-	AbilityMods Mods
+	AbilityScores ability.AbilityScores
 	//Actions
 	Actions     int
 	BonusAction int
@@ -29,8 +30,6 @@ type Character struct {
 	HitPoints int
 	//Armor
 	ArmorClass int
-	//Inventory
-	Inventory inv.Inventory
 	//Initiative
 	Initiative int
 	//
@@ -55,19 +54,18 @@ func InteractiveCreateCharacter() {
 
 }
 
-type AS struct {
-	Strength     int
-	Dexterity    int
-	Intelligence int
-	Wisdom       int
-	Constitution int
-	Charisma     int
-}
-type Mods struct {
-	StrengthMod     int
-	DexterityMod    int
-	IntelligenceMod int
-	WisdomMod       int
-	ConstitutionMod int
-	CharismaMod     int
+func Load() (cs class.Classes) {
+	jsonFile, err := os.Open("./json/classes.json")
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	defer jsonFile.Close()
+
+	byteValue, _ := ioutil.ReadAll(jsonFile)
+
+	json.Unmarshal(byteValue, &cs)
+	fmt.Println(cs)
+	return cs
 }
