@@ -1,36 +1,61 @@
-package monsters
+package Monsters
 
-type Monster struct {
+import (
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"os"
+)
+
+type Monsters struct {
+	Acrobatics            float64            `json:"acrobatics"`
 	Actions               []Actions          `json:"actions"`
 	Alignment             string             `json:"alignment"`
+	Arcana                float64            `json:"arcana"`
 	ArmorClass            float64            `json:"armor_class"`
+	Athletics             float64            `json:"athletics"`
 	ChallengeRating       float64            `json:"challenge_rating"`
 	Charisma              float64            `json:"charisma"`
 	CharismaSave          float64            `json:"charisma_save"`
-	ConditionImmunities   string             `json:"condition_immunities"`
+	ConditionImmunities   []string           `json:"condition_immunities"`
 	Constitution          float64            `json:"constitution"`
 	ConstitutionSave      float64            `json:"constitution_save"`
-	DamageImmunities      string             `json:"damage_immunities"`
-	DamageResistances     string             `json:"damage_resistances"`
-	DamageVulnerabilities string             `json:"damage_vulnerabilities"`
+	DamageImmunities      []string           `json:"damage_immunities"`
+	DamageResistances     []string           `json:"damage_resistances"`
+	DamageVulnerabilities []string           `json:"damage_vulnerabilities"`
+	Deception             float64            `json:"deception"`
 	Dexterity             float64            `json:"dexterity"`
 	DexteritySave         float64            `json:"dexterity_save"`
+	History               float64            `json:"history"`
 	HitDice               string             `json:"hit_dice"`
 	HitPoints             float64            `json:"hit_points"`
-	ID                    string             `json:"_id"`
 	Index                 float64            `json:"index"`
+	Insight               float64            `json:"insight"`
 	Intelligence          float64            `json:"intelligence"`
+	IntelligenceSave      float64            `json:"intelligence_save"`
+	Intimidation          float64            `json:"intimidation"`
+	Investigation         float64            `json:"investigation"`
 	Languages             string             `json:"languages"`
 	LegendaryActions      []LegendaryActions `json:"legendary_actions"`
+	Medicine              float64            `json:"medicine"`
+	Monsters              []Monsters         `json:"Monsters"`
 	Name                  string             `json:"name"`
+	Nature                float64            `json:"nature"`
+	OtherSpeeds           []OtherSpeeds      `json:"other_speeds"`
 	Perception            float64            `json:"perception"`
+	Performance           float64            `json:"performance"`
+	Persuasion            float64            `json:"persuasion"`
+	Reactions             []Reactions        `json:"reactions"`
+	Religion              float64            `json:"religion"`
 	Senses                string             `json:"senses"`
 	Size                  string             `json:"size"`
 	SpecialAbilities      []SpecialAbilities `json:"special_abilities"`
-	Speed                 string             `json:"speed"`
+	Speed                 Speed              `json:"speed"`
 	Stealth               float64            `json:"stealth"`
 	Strength              float64            `json:"strength"`
+	StrengthSave          float64            `json:"strength_save"`
 	Subtype               string             `json:"subtype"`
+	Survival              float64            `json:"survival"`
 	Type                  string             `json:"type"`
 	URL                   string             `json:"url"`
 	Wisdom                float64            `json:"wisdom"`
@@ -45,13 +70,32 @@ type Actions struct {
 }
 type LegendaryActions struct {
 	AttackBonus float64 `json:"attack_bonus"`
+	DamageDice  string  `json:"damage_dice"`
 	Desc        string  `json:"desc"`
 	Name        string  `json:"name"`
 }
-
-type Monsters struct {
-	Monsters []Monster `json:"monsters"`
-	//Monster  Monster    `json:"monster"`
+type OtherSpeeds struct {
+	Form  string `json:"form"`
+	Speed Speed  `json:"speed"`
+}
+type Reactions struct {
+	AttackBonus float64 `json:"attack_bonus"`
+	Desc        string  `json:"desc"`
+	Name        string  `json:"name"`
+}
+type SpecialAbilities struct {
+	AttackBonus float64 `json:"attack_bonus"`
+	DamageDice  string  `json:"damage_dice"`
+	Desc        string  `json:"desc"`
+	Name        string  `json:"name"`
+}
+type Speed struct {
+	Burrow string `json:"burrow"`
+	Climb  string `json:"climb"`
+	Fly    string `json:"fly"`
+	Hover  bool   `json:"hover"`
+	Swim   string `json:"swim"`
+	Walk   string `json:"walk"`
 }
 
 func LoadMonsters() (ms Monsters) {

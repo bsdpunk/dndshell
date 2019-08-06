@@ -4,6 +4,7 @@ import (
 	"./ability"
 	"./class"
 	"./race"
+	//	"./skill"
 	"bufio"
 	"encoding/json"
 	"fmt"

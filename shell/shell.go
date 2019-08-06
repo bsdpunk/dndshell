@@ -6,7 +6,7 @@ import (
 	"./commands"
 	"./dice"
 	"./general"
-	"./monsters"
+	//	"./monsters"
 	"fmt"
 	"github.com/gobs/readline"
 	"strings"
