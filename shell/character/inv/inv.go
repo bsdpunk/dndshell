@@ -1,4 +1,4 @@
-package main
+package inv
 
 type Inventory struct {
 	Amount int

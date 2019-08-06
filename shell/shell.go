@@ -1,6 +1,7 @@
 package shell
 
 import (
+	"./character"
 	"./commands"
 	"./dice"
 	"./general"
@@ -36,6 +37,13 @@ var coms = commands.Commands{
 		SubCommands:  dice.DiceSubs,
 		StringAction: dice.GetDice,
 		Category:     "general",
+	},
+	{
+		Name:      "CreateCharacter",
+		ShortName: "ic",
+		Usage:     "",
+		Action:    character.InteractiveCreateCharacter,
+		Category:  "general",
 	},
 }
 

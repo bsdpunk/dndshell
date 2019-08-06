@@ -1,11 +1,13 @@
-package main
+package character
 
 import "fmt"
 import "./class"
 import "./race"
 import "./inv"
-
-var Class = class.Class
+import "bufio"
+import "os"
+import "strings"
+import "encoding/json"
 
 type Character struct {
 	//Player's Name
@@ -13,7 +15,7 @@ type Character struct {
 	//Characther's Name
 	CharacterName string
 	//Class
-	CharacterClass Class.Classes
+	CharacterClass class.Classes
 	//Race
 	CharacerRace race.Race
 	// Ability Scores
@@ -34,8 +36,8 @@ type Character struct {
 	//
 }
 
-func InteractiveCreateCharacter(c Character) {
-
+func InteractiveCreateCharacter() {
+	c := Character{}
 	reader := bufio.NewReader(os.Stdin)
 	//fmt.Println(urlStr)
 	fmt.Print("Name$ ")
@@ -43,6 +45,12 @@ func InteractiveCreateCharacter(c Character) {
 	Name = strings.Replace(Name, "\n", "", -1)
 	c.PlayerName = Name
 	fmt.Println(c)
+	e, err := json.Marshal(&c)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println(string(e))
 	return
 
 }
