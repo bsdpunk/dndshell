@@ -54,13 +54,17 @@ type Monsters struct {
 	//Monster  Monster    `json:"monster"`
 }
 
-type Monster struct {
-	Name        string `json:"name"`
-	Id          int    `json:"id"`
-	Age         string `json:"HITPOINTS"`
-	AC          int    `json:"AC"`
-	CR          int    `json:"CR"`
-	XP          string `json:"XP"`
-	Description string `json:"Descriptions"`
-	//squad
+func LoadMonsters() (ms Monsters) {
+	jsonFile, err := os.Open("./json/monsters.json")
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	defer jsonFile.Close()
+
+	byteValue, _ := ioutil.ReadAll(jsonFile)
+
+	json.Unmarshal(byteValue, &ms)
+	return ms
 }

@@ -6,6 +6,7 @@ import (
 	"./commands"
 	"./dice"
 	"./general"
+	"./monsters"
 	"fmt"
 	"github.com/gobs/readline"
 	"strings"
@@ -84,6 +85,7 @@ func Shell() {
 		list = append(list, c.ShortName)
 	}
 	//	cs := character.LoadClasses()
+	//ms := monsters.Load()
 	prompt := "> "
 	matches = make([]string, 0, len(list))
 L:
