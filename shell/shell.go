@@ -46,6 +46,13 @@ var coms = commands.Commands{
 		Category:  "general",
 	},
 	{
+		Name:      "ListAbilities",
+		ShortName: "al",
+		Usage:     "Show Abilities List",
+		Action:    character.As.List,
+		Category:  "character",
+	},
+	{
 		Name:      "ListRaces",
 		ShortName: "rl",
 		Usage:     "Show Class List",
@@ -65,6 +72,14 @@ var coms = commands.Commands{
 		Usage:     "Show Monster List",
 		Action:    character.Ms.List,
 		Category:  "monsters",
+	},
+	{
+		Name:         "AbilityById",
+		ShortName:    "aid",
+		Usage:        "Show an Ability by ID",
+		SubCommands:  character.AbilitySubs,
+		StringAction: character.As.ById,
+		Category:     "monsters",
 	},
 	{
 		Name:         "RaceById",

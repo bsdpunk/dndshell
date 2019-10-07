@@ -1,6 +1,14 @@
 package ability
 
-type AbilityScores struct {
+import (
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"os"
+	"strconv"
+)
+
+type AbilityScore struct {
 	AbilityScores []AbilityScores `json:"Ability-Scores"`
 	Desc          []string        `json:"desc"`
 	FullName      string          `json:"full_name"`
@@ -12,4 +20,42 @@ type AbilityScores struct {
 type Skills struct {
 	Name string `json:"name"`
 	URL  string `json:"url"`
+}
+
+type AbilityScores struct {
+	AbilityScores []AbilityScore
+}
+
+func (rc *AbilityScores) Load() {
+	jsonFile, err := os.Open("./json/ability.json")
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	defer jsonFile.Close()
+
+	byteValue, _ := ioutil.ReadAll(jsonFile)
+	if err := json.Unmarshal(byteValue, &rc.AbilityScores); err != nil {
+		fmt.Println(err)
+	}
+	//json.Unmarshal(byteValue, &ms)
+	return
+}
+
+func (rc *AbilityScores) ById(id string) {
+
+	n, _ := strconv.Atoi(id)
+	fmt.Println(rc.AbilityScores[n]) //.Strength)
+	return
+}
+
+func (rc *AbilityScores) List() {
+	for i := range rc.AbilityScores {
+		fmt.Print((rc.AbilityScores[i].Index - 1))
+		fmt.Println(" " + rc.AbilityScores[i].Name)
+	}
+	//fmt.Println(cl.AbilityScores)
+	return
+
 }

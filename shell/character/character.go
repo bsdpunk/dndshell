@@ -5,9 +5,9 @@ import (
 	"./ability"
 	class "./class"
 	"./race"
+	"bufio"
 	//	"./skill"
 	"../monsters"
-	"bufio"
 	"encoding/json"
 	"fmt"
 	//	"io/ioutil"
@@ -19,7 +19,7 @@ import (
 var Cl class.Classes
 var Rc race.Races
 
-//var As ability.Ability
+var As ability.AbilityScores
 var Ms Monsters.Monsters
 var ClassSubs = commands.Commands{
 	{
@@ -34,6 +34,14 @@ var RaceSubs = commands.Commands{
 		Name:      "RaceById",
 		ShortName: "rid",
 		Usage:     "Get Race By Id",
+		Category:  "Character",
+	},
+}
+var AbilitySubs = commands.Commands{
+	{
+		Name:      "AbilityById",
+		ShortName: "aid",
+		Usage:     "Get Ability By Id",
 		Category:  "Character",
 	},
 }
@@ -58,6 +66,8 @@ type Character struct {
 	CharacterRace race.Race
 	// Ability Scores
 	AbilityScores ability.AbilityScores
+	//Scores
+	CharacterScores []int
 	//Actions
 	Actions     int
 	BonusAction int
@@ -74,6 +84,7 @@ func Load() {
 	Cl.Load()
 	Rc.Load()
 	Ms.Load()
+	As.Load()
 }
 func (cr *Character) ChooseClass(id string) {
 	n, _ := strconv.Atoi(id)
@@ -86,6 +97,19 @@ func (cr *Character) ChooseRace(id string) {
 	cr.CharacterRace = Rc.Races[n]
 	return
 }
+func (cr *Character) GetScores() {
+	var scores []int
+	for i := range As.AbilityScores {
+		fmt.Println("What is your " + As.AbilityScores[i].Name + " (R for Roll):")
+		reader := bufio.NewReader(os.Stdin)
+		score, _ := reader.ReadString('\n')
+		score = strings.Replace(score, "\n", "", -1)
+		n, _ := strconv.Atoi(score)
+		scores = append(scores, n)
+	}
+	cr.CharacterScores = scores
+	return
+}
 
 func InteractiveCreateCharacter() {
 	c := Character{}
@@ -95,7 +119,7 @@ func InteractiveCreateCharacter() {
 	Name, _ := reader.ReadString('\n')
 	Name = strings.Replace(Name, "\n", "", -1)
 	c.PlayerName = Name
-	fmt.Println(c)
+	//fmt.Println(c)
 	Rc.List()
 	fmt.Print("Choose Race: ")
 	crace, _ := reader.ReadString('\n')
@@ -107,6 +131,8 @@ func InteractiveCreateCharacter() {
 	cclass, _ := reader.ReadString('\n')
 	cclass = strings.Replace(Name, "\n", "", -1)
 	c.ChooseRace(cclass)
+	c.GetScores()
+
 	e, err := json.Marshal(&c)
 	if err != nil {
 		fmt.Println(err)
