@@ -1,5 +1,23 @@
 package class
 
+import (
+	"../../commands"
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"os"
+	"strconv"
+)
+
+var ClassSubs = commands.Commands{
+	{
+		Name:      "ClassById",
+		ShortName: "cid",
+		Usage:     "Get Class By Id",
+		Category:  "Character",
+	},
+}
+
 type Class struct {
 	ClassLevels        ClassLevels          `json:"class_levels"`
 	HitDie             float64              `json:"hit_die"`
@@ -45,4 +63,38 @@ type Subclasses struct {
 
 type Classes struct {
 	Classes []Class `json:"classes"`
+}
+
+func (cl *Classes) Load() {
+	jsonFile, err := os.Open("./json/class.json")
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	defer jsonFile.Close()
+
+	byteValue, _ := ioutil.ReadAll(jsonFile)
+	if err := json.Unmarshal(byteValue, &cl.Classes); err != nil {
+		fmt.Println(err)
+	}
+	//json.Unmarshal(byteValue, &ms)
+	return
+}
+
+func (cl *Classes) ClassById(id string) {
+
+	n, _ := strconv.Atoi(id)
+	fmt.Println(cl.Classes[n]) //.Strength)
+	return
+}
+
+func (cl *Classes) ListClasses() {
+	for i := range cl.Classes {
+		fmt.Print((cl.Classes[i].Index - 1))
+		fmt.Println(" " + cl.Classes[i].Name)
+	}
+	//fmt.Println(cl.Classes)
+	return
+
 }

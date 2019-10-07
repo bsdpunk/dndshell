@@ -2,11 +2,11 @@ package shell
 
 import (
 	"./character"
-	//	class "./character/class"
+	class "./character/class"
 	"./commands"
 	"./dice"
 	"./general"
-	//	"./monsters"
+	monsters "./monsters"
 	"fmt"
 	"github.com/gobs/readline"
 	"strings"
@@ -14,7 +14,8 @@ import (
 
 var found string = "no"
 var list []string
-
+var cl class.Classes
+var ms monsters.Monsters
 var matches = make([]string, 0, len(list))
 
 var coms = commands.Commands{
@@ -46,6 +47,36 @@ var coms = commands.Commands{
 		Usage:     "",
 		Action:    character.InteractiveCreateCharacter,
 		Category:  "general",
+	},
+	{
+		Name:      "ListClasses",
+		ShortName: "cl",
+		Usage:     "Show Class List",
+		Action:    cl.ListClasses,
+		Category:  "character",
+	},
+	{
+		Name:      "ListMonster",
+		ShortName: "ml",
+		Usage:     "Show Monster List",
+		Action:    ms.List,
+		Category:  "monsters",
+	},
+	{
+		Name:         "ClassById",
+		ShortName:    "cid",
+		Usage:        "Show a class by ID",
+		SubCommands:  class.ClassSubs,
+		StringAction: cl.ClassById,
+		Category:     "monsters",
+	},
+	{
+		Name:         "MonsterById",
+		ShortName:    "mid",
+		Usage:        "Show a monster by ID",
+		SubCommands:  monsters.MonsterSubs,
+		StringAction: ms.MonsterById,
+		Category:     "monsters",
 	},
 }
 
@@ -79,7 +110,8 @@ func NoAction() {
 
 }
 func Shell() {
-
+	cl.Load()
+	ms.Load()
 	for _, c := range coms {
 		list = append(list, c.Name)
 		list = append(list, c.ShortName)
@@ -107,11 +139,14 @@ L:
 				if len(cmd.SubCommands) == 0 {
 					cmd.Action()
 				}
+
 			} else {
 				if cmd.SubCommands.HasCommand(words[1]) {
 					cmd.Action()
-				} else {
-					cmd.StringAction(words[1])
+				} else if !(cmd.SubCommands.HasCommand(words[1])) {
+					if cmd.StringAction != nil {
+						cmd.StringAction(words[1])
+					}
 				}
 			}
 		}

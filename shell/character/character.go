@@ -45,6 +45,7 @@ func InteractiveCreateCharacter() {
 	Name = strings.Replace(Name, "\n", "", -1)
 	c.PlayerName = Name
 	fmt.Println(c)
+
 	e, err := json.Marshal(&c)
 	if err != nil {
 		fmt.Println(err)

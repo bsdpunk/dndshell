@@ -1,13 +1,24 @@
 package Monsters
 
 import (
+	"../commands"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"os"
+	"strconv"
 )
 
-type Monsters struct {
+var MonsterSubs = commands.Commands{
+	{
+		Name:      "MonsterById",
+		ShortName: "mid",
+		Usage:     "Get Monster By Id",
+		Category:  "",
+	},
+}
+
+type Monster struct {
 	Acrobatics            float64            `json:"acrobatics"`
 	Actions               []Actions          `json:"actions"`
 	Alignment             string             `json:"alignment"`
@@ -38,7 +49,7 @@ type Monsters struct {
 	Languages             string             `json:"languages"`
 	LegendaryActions      []LegendaryActions `json:"legendary_actions"`
 	Medicine              float64            `json:"medicine"`
-	Monsters              []Monsters         `json:"Monsters"`
+	Monsters              []Monster          `json:"Monsters"`
 	Name                  string             `json:"name"`
 	Nature                float64            `json:"nature"`
 	OtherSpeeds           []OtherSpeeds      `json:"other_speeds"`
@@ -63,10 +74,10 @@ type Monsters struct {
 }
 type Actions struct {
 	AttackBonus float64 `json:"attack_bonus"`
-	DamageBonus float64 `json:"damage_bonus"`
-	DamageDice  string  `json:"damage_dice"`
-	Desc        string  `json:"desc"`
-	Name        string  `json:"name"`
+	//DamageBonus float64    `json:"damage_bonus"`
+	DamageDice string `json:"damage_dice"`
+	Desc       string `json:"desc"`
+	Name       string `json:"name"`
 }
 type LegendaryActions struct {
 	AttackBonus float64 `json:"attack_bonus"`
@@ -97,8 +108,27 @@ type Speed struct {
 	Swim   string `json:"swim"`
 	Walk   string `json:"walk"`
 }
+type Monsters struct {
+	Monsters []Monster
+}
 
-func LoadMonsters() (ms Monsters) {
+func (ms *Monsters) List() {
+
+	for i := range ms.Monsters {
+		fmt.Print((ms.Monsters[i].Index - 1))
+		fmt.Println(" " + ms.Monsters[i].Name)
+	}
+	return
+
+}
+
+func (ms *Monsters) MonsterById(id string) {
+	n, _ := strconv.Atoi(id)
+	fmt.Println(ms.Monsters[n]) //.Strength)
+	return
+}
+
+func (ms *Monsters) Load() {
 	jsonFile, err := os.Open("./json/monsters.json")
 
 	if err != nil {
@@ -108,7 +138,9 @@ func LoadMonsters() (ms Monsters) {
 	defer jsonFile.Close()
 
 	byteValue, _ := ioutil.ReadAll(jsonFile)
-
-	json.Unmarshal(byteValue, &ms)
-	return ms
+	if err := json.Unmarshal(byteValue, &ms.Monsters); err != nil {
+		fmt.Println(err)
+	}
+	//json.Unmarshal(byteValue, &ms)
+	return
 }
