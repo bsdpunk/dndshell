@@ -1,5 +1,13 @@
 package race
 
+import (
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"os"
+	"strconv"
+)
+
 type Race struct {
 	AbilityBonusOptions        AbilityBonusOptions        `json:"ability_bonus_options"`
 	AbilityBonuses             []AbilityBonuses           `json:"ability_bonuses"`
@@ -68,5 +76,39 @@ type Traits struct {
 	URL  string `json:"url"`
 }
 type Races struct {
-	races []Race
+	Races []Race
+}
+
+func (rc *Races) Load() {
+	jsonFile, err := os.Open("./json/race.json")
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	defer jsonFile.Close()
+
+	byteValue, _ := ioutil.ReadAll(jsonFile)
+	if err := json.Unmarshal(byteValue, &rc.Races); err != nil {
+		fmt.Println(err)
+	}
+	//json.Unmarshal(byteValue, &ms)
+	return
+}
+
+func (rc *Races) RaceById(id string) {
+
+	n, _ := strconv.Atoi(id)
+	fmt.Println(rc.Races[n]) //.Strength)
+	return
+}
+
+func (rc *Races) List() {
+	for i := range rc.Races {
+		fmt.Print((rc.Races[i].Index - 1))
+		fmt.Println(" " + rc.Races[i].Name)
+	}
+	//fmt.Println(cl.Races)
+	return
+
 }

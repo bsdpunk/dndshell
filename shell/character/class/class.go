@@ -1,22 +1,12 @@
 package class
 
 import (
-	"../../commands"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"os"
 	"strconv"
 )
-
-var ClassSubs = commands.Commands{
-	{
-		Name:      "ClassById",
-		ShortName: "cid",
-		Usage:     "Get Class By Id",
-		Category:  "Character",
-	},
-}
 
 type Class struct {
 	ClassLevels        ClassLevels          `json:"class_levels"`
@@ -89,7 +79,7 @@ func (cl *Classes) ClassById(id string) {
 	return
 }
 
-func (cl *Classes) ListClasses() {
+func (cl *Classes) List() {
 	for i := range cl.Classes {
 		fmt.Print((cl.Classes[i].Index - 1))
 		fmt.Println(" " + cl.Classes[i].Name)

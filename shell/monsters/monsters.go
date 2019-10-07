@@ -1,22 +1,12 @@
 package Monsters
 
 import (
-	"../commands"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"os"
 	"strconv"
 )
-
-var MonsterSubs = commands.Commands{
-	{
-		Name:      "MonsterById",
-		ShortName: "mid",
-		Usage:     "Get Monster By Id",
-		Category:  "",
-	},
-}
 
 type Monster struct {
 	Acrobatics            float64            `json:"acrobatics"`

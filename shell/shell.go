@@ -2,11 +2,9 @@ package shell
 
 import (
 	"./character"
-	class "./character/class"
 	"./commands"
 	"./dice"
 	"./general"
-	monsters "./monsters"
 	"fmt"
 	"github.com/gobs/readline"
 	"strings"
@@ -14,8 +12,7 @@ import (
 
 var found string = "no"
 var list []string
-var cl class.Classes
-var ms monsters.Monsters
+var cr character.Character
 var matches = make([]string, 0, len(list))
 
 var coms = commands.Commands{
@@ -49,33 +46,48 @@ var coms = commands.Commands{
 		Category:  "general",
 	},
 	{
+		Name:      "ListRaces",
+		ShortName: "rl",
+		Usage:     "Show Class List",
+		Action:    character.Rc.List,
+		Category:  "character",
+	},
+	{
 		Name:      "ListClasses",
 		ShortName: "cl",
 		Usage:     "Show Class List",
-		Action:    cl.ListClasses,
+		Action:    character.Cl.List,
 		Category:  "character",
 	},
 	{
 		Name:      "ListMonster",
 		ShortName: "ml",
 		Usage:     "Show Monster List",
-		Action:    ms.List,
+		Action:    character.Ms.List,
 		Category:  "monsters",
+	},
+	{
+		Name:         "RaceById",
+		ShortName:    "rid",
+		Usage:        "Show a race by ID",
+		SubCommands:  character.RaceSubs,
+		StringAction: character.Rc.RaceById,
+		Category:     "monsters",
 	},
 	{
 		Name:         "ClassById",
 		ShortName:    "cid",
 		Usage:        "Show a class by ID",
-		SubCommands:  class.ClassSubs,
-		StringAction: cl.ClassById,
+		SubCommands:  character.ClassSubs,
+		StringAction: character.Cl.ClassById,
 		Category:     "monsters",
 	},
 	{
 		Name:         "MonsterById",
 		ShortName:    "mid",
 		Usage:        "Show a monster by ID",
-		SubCommands:  monsters.MonsterSubs,
-		StringAction: ms.MonsterById,
+		SubCommands:  character.MonsterSubs,
+		StringAction: character.Ms.MonsterById,
 		Category:     "monsters",
 	},
 }
@@ -110,8 +122,7 @@ func NoAction() {
 
 }
 func Shell() {
-	cl.Load()
-	ms.Load()
+	character.Load()
 	for _, c := range coms {
 		list = append(list, c.Name)
 		list = append(list, c.ShortName)
