@@ -169,11 +169,12 @@ func (ms *Monsters) ByGuess(name string) {
 
 func (ms *Monsters) ByCR(chall string) {
 	parser, err := jsonql.NewStringQuery(ms.jsonString)
+	fchall := strconv.ParseFloat(chall)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-	fmt.Println(parser.Query("challenge_rating='" + chall + "'"))
+	fmt.Println(parser.Query("challenge_rating=" + fchall))
 }
 
 func (ms *Monsters) Load() {
