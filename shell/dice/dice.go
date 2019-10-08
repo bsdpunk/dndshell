@@ -1,8 +1,8 @@
 package dice
 
 import (
-	"../commands"
 	"fmt"
+	"github.com/bsdpunk/dndshell/shell/commands"
 	"math/rand"
 	"os"
 	"strconv"
