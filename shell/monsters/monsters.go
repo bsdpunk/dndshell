@@ -3,11 +3,14 @@ package Monsters
 import (
 	"encoding/json"
 	"fmt"
+	h "github.com/mitchellh/go-homedir"
 	"github.com/tatsushid/go-prettytable"
 	"io/ioutil"
 	"os"
 	"strconv"
 )
+
+var Home, _ = h.Dir()
 
 type Monster struct {
 	Acrobatics            float64            `json:"acrobatics"`

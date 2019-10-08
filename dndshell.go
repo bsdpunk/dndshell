@@ -5,9 +5,6 @@ import "bufio"
 import "os"
 import "log"
 import "github.com/bsdpunk/dndshell/shell"
-import h "github.com/mitchellh/go-homedir"
-
-var Home, _ = h.Dir()
 
 func main() {
 

@@ -3,11 +3,14 @@ package quotes
 import (
 	"encoding/json"
 	"fmt"
+	h "github.com/mitchellh/go-homedir"
 	"io/ioutil"
 	"math/rand"
 	"os"
 	"time"
 )
+
+var Home, _ = h.Dir()
 
 type Quote struct {
 	Index  int    `json:"index"`

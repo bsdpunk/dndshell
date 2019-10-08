@@ -3,10 +3,13 @@ package race
 import (
 	"encoding/json"
 	"fmt"
+	h "github.com/mitchellh/go-homedir"
 	"io/ioutil"
 	"os"
 	"strconv"
 )
+
+var Home, _ = h.Dir()
 
 type Race struct {
 	AbilityBonusOptions        AbilityBonusOptions        `json:"ability_bonus_options"`

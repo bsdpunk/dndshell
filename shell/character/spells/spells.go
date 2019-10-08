@@ -8,9 +8,12 @@ import (
 	//"log"
 	"os"
 	//"os/exec"
+	h "github.com/mitchellh/go-homedir"
 	"strconv"
 	"strings"
 )
+
+var Home, _ = h.Dir()
 
 type Spell struct {
 	Index         int      `json:"index"`

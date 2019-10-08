@@ -1,5 +1,11 @@
 package feats
 
+import (
+	h "github.com/mitchellh/go-homedir"
+)
+
+var Home, _ = h.Dir()
+
 type Feats struct {
 	Class Class    `json:"class"`
 	Desc  []string `json:"desc"`

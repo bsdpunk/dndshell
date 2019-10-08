@@ -3,10 +3,13 @@ package levels
 import (
 	"encoding/json"
 	"fmt"
+	h "github.com/mitchellh/go-homedir"
 	"io/ioutil"
 	"os"
 	"strconv"
 )
+
+var Home, _ = h.Dir()
 
 type CharLevel struct {
 	Level               int `json:"level"`

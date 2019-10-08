@@ -1,5 +1,11 @@
 package skill
 
+import (
+	h "github.com/mitchellh/go-homedir"
+)
+
+var Home, _ = h.Dir()
+
 type Skill struct {
 	AbilityScore AbilityScore `json:"ability_score"`
 	Desc         []string     `json:"desc"`
