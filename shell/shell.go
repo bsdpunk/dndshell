@@ -153,6 +153,14 @@ var coms = commands.Commands{
 		Category:     "monsters",
 	},
 	{
+		Name:         "MonsterByCR",
+		ShortName:    "mbc",
+		Usage:        "Show a monster by CR",
+		SubCommands:  character.MonsterSubs,
+		StringAction: character.Ms.MonsterByCR,
+		Category:     "monsters",
+	},
+	{
 		Name:         "MonsterById",
 		ShortName:    "mid",
 		Usage:        "Show a monster by ID",

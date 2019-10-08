@@ -167,6 +167,15 @@ func (ms *Monsters) ByGuess(name string) {
 	fmt.Println(parser.Query("name~='" + name + "'"))
 }
 
+func (ms *Monsters) ByCR(chall string) {
+	parser, err := jsonql.NewStringQuery(ms.jsonString)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println(parser.Query("challenge_rating='" + chall + "'"))
+}
+
 func (ms *Monsters) Load() {
 	jsonFile, err := os.Open(Home + "/go/src/github.com/bsdpunk/dndshell/json/monsters.json")
 
