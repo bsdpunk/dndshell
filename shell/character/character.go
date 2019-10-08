@@ -87,6 +87,8 @@ type Character struct {
 	AbilityScores ability.AbilityScores
 	//Scores
 	CharacterScores []int
+	//Modifiers
+	CharacterModifiers []int
 	//Actions
 	Actions     int
 	BonusAction int
@@ -125,15 +127,25 @@ func (cr *Character) ChooseRace(id *string) {
 }
 func (cr *Character) GetScores() {
 	var scores []int
+	var mods []int
 	for i := range As.AbilityScores {
 		fmt.Println("What is your " + As.AbilityScores[i].Name + " (R for Roll):")
 		reader := bufio.NewReader(os.Stdin)
 		score, _ := reader.ReadString('\n')
 		score = strings.Replace(score, "\n", "", -1)
 		n, _ := strconv.Atoi(score)
+		if n == 12 || n == 13 {
+			mods = append(mods, 1)
+		} else if n == 8 || n == 9 {
+			mods = append(mods, -1)
+		} else {
+			mods = append(mods, 0)
+		}
 		scores = append(scores, n)
 	}
 	cr.CharacterScores = scores
+	cr.CharacterModifiers = mods
+
 	return
 }
 
