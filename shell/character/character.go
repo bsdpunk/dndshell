@@ -84,6 +84,29 @@ var LevelSubs = commands.Commands{
 	},
 }
 
+var levToP = map[int]int{
+	1:  2,
+	2:  2,
+	3:  2,
+	4:  2,
+	5:  3,
+	6:  3,
+	7:  3,
+	8:  3,
+	9:  4,
+	10: 4,
+	11: 4,
+	12: 4,
+	13: 5,
+	14: 5,
+	15: 5,
+	16: 5,
+	17: 6,
+	18: 6,
+	19: 6,
+	20: 6,
+}
+
 type Character struct {
 	//Player's Name
 	PlayerName string
@@ -102,13 +125,16 @@ type Character struct {
 	//Actions
 	Actions     int
 	BonusAction int
+	//Level Prof Bonus Map
+	Prof int
 	//Health
 	HitPoints int
 	//Armor
 	ArmorClass int
 	//Initiative
 	Initiative int
-	//
+	//Level
+	Level int
 }
 
 func Load() {
@@ -181,8 +207,12 @@ func InteractiveCreateCharacter() {
 	Cl.List()
 	promptC := "Choose Class: "
 	readC := readline.ReadLine(&promptC)
-
 	c.ChooseClass(readC)
+
+	promptL := "What Level: "
+	readL := readline.ReadLine(&promptL)
+	c.Level, _ = strconv.Atoi(*readL)
+	c.Prof = levToP[c.Level]
 	c.GetScores()
 
 	e, err := json.Marshal(&c)
