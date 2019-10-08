@@ -1,12 +1,12 @@
 package shell
 
 import (
-	"./character"
-	"./commands"
-	"./dice"
-	"./general"
-	"./quotes"
 	"fmt"
+	"github.com/bsdpunk/dndshell/shell/character"
+	"github.com/bsdpunk/dndshell/shell/commands"
+	"github.com/bsdpunk/dndshell/shell/dice"
+	"github.com/bsdpunk/dndshell/shell/general"
+	"github.com/bsdpunk/dndshell/shell/quotes"
 	"github.com/gobs/readline"
 	"strings"
 )

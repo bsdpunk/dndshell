@@ -5,7 +5,6 @@ import "bufio"
 import "os"
 import "log"
 import "github.com/bsdpunk/dndshell/shell"
-import "reflect"
 
 func main() {
 
@@ -13,7 +12,7 @@ func main() {
 	stat, _ := os.Stdin.Stat()
 	if (stat.Mode() & os.ModeCharDevice) == 0 {
 		for scanner.Scan() {
-			fmt.Println(reflect.TypeOf(scanner.Text()))
+			fmt.Println("Feature to come later")
 
 		}
 		if err := scanner.Err(); err != nil {
