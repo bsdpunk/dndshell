@@ -16,3 +16,37 @@ type AbilityScore struct {
 type Skills struct {
 	Skills []Skill
 }
+
+func (rc *Skills) Load() {
+	jsonFile, err := os.Open("./json/skills.json")
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	defer jsonFile.Close()
+
+	byteValue, _ := ioutil.ReadAll(jsonFile)
+	if err := json.Unmarshal(byteValue, &rc.Skills); err != nil {
+		fmt.Println(err)
+	}
+	//json.Unmarshal(byteValue, &ms)
+	return
+}
+
+func (rc *Skills) ById(id string) {
+
+	n, _ := strconv.Atoi(id)
+	fmt.Println(rc.Skills[n]) //.Strength)
+	return
+}
+
+func (rc *Skills) List() {
+	for i := range rc.Skills {
+		fmt.Print((rc.Skills[i].Index - 1))
+		fmt.Println(" " + rc.Skills[i].Name)
+	}
+	//fmt.Println(cl.Skills)
+	return
+
+}
