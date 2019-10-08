@@ -13,3 +13,26 @@ type Class struct {
 	Name string `json:"name"`
 	URL  string `json:"url"`
 }
+
+func (ms *Feats) FeatById(id string) {
+	n, _ := strconv.Atoi(id)
+	fmt.Println(ms.Feats[n]) //.Strength)
+	return
+}
+
+func (ms *Feats) Load() {
+	jsonFile, err := os.Open("./json/monsters.json")
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	defer jsonFile.Close()
+
+	byteValue, _ := ioutil.ReadAll(jsonFile)
+	if err := json.Unmarshal(byteValue, &ms.Feats); err != nil {
+		fmt.Println(err)
+	}
+	//json.Unmarshal(byteValue, &ms)
+	return
+}
