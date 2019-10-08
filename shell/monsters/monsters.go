@@ -146,7 +146,7 @@ func (mo *Monster) StatBlock() {
 }
 
 func (ms *Monsters) Load() {
-	jsonFile, err := os.Open("./json/monsters.json")
+	jsonFile, err := os.Open("../src/github.com/bsdpunk/dndshell/json/monsters.json")
 
 	if err != nil {
 		fmt.Println(err)

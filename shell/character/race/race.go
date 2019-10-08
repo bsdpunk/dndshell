@@ -80,7 +80,7 @@ type Races struct {
 }
 
 func (rc *Races) Load() {
-	jsonFile, err := os.Open("./json/race.json")
+	jsonFile, err := os.Open("../../../json/race.json")
 
 	if err != nil {
 		fmt.Println(err)

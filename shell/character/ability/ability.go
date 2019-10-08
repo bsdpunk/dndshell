@@ -27,7 +27,7 @@ type AbilityScores struct {
 }
 
 func (rc *AbilityScores) Load() {
-	jsonFile, err := os.Open("./json/ability.json")
+	jsonFile, err := os.Open("../src/github.com/bsdpunk/dndshell/json/ability.json")
 
 	if err != nil {
 		fmt.Println(err)
