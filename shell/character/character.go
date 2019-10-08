@@ -64,7 +64,7 @@ type Character struct {
 	CharacterClass class.Class
 	//Race
 	CharacterRace race.Race
-	// Ability Scores
+	// Ability Score Definitions and Relationships
 	AbilityScores ability.AbilityScores
 	//Scores
 	CharacterScores []int
@@ -130,7 +130,7 @@ func InteractiveCreateCharacter() {
 
 	cclass, _ := reader.ReadString('\n')
 	cclass = strings.Replace(Name, "\n", "", -1)
-	c.ChooseRace(cclass)
+	c.ChooseClass(cclass)
 	c.GetScores()
 
 	e, err := json.Marshal(&c)
