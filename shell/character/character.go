@@ -4,8 +4,10 @@ import (
 	"../commands"
 	"./ability"
 	class "./class"
+	"./levels"
 	"./race"
 	"bufio"
+	"github.com/gobs/readline"
 	//	"./skill"
 	"../monsters"
 	"encoding/json"
@@ -18,6 +20,7 @@ import (
 
 var Cl class.Classes
 var Rc race.Races
+var Ls levels.Levels
 
 var As ability.AbilityScores
 var Ms Monsters.Monsters
@@ -54,6 +57,15 @@ var MonsterSubs = commands.Commands{
 		Category:  "",
 	},
 }
+var LevelSubs = commands.Commands{
+
+	{
+		Name:      "LevelById",
+		ShortName: "lid",
+		Usage:     "Get Level By Id",
+		Category:  "",
+	},
+}
 
 type Character struct {
 	//Player's Name
@@ -85,16 +97,23 @@ func Load() {
 	Rc.Load()
 	Ms.Load()
 	As.Load()
+	Ls.Load()
 }
-func (cr *Character) ChooseClass(id string) {
-	n, _ := strconv.Atoi(id)
+func (cr *Character) ChooseClass(id *string) {
+	idt := *id
+	n, _ := strconv.Atoi(idt)
 	cr.CharacterClass = Cl.Classes[n]
+	fmt.Println(Cl.Classes[n])
 	return
 }
 
-func (cr *Character) ChooseRace(id string) {
-	n, _ := strconv.Atoi(id)
+func (cr *Character) ChooseRace(id *string) {
+	idt := *id
+	n, _ := strconv.Atoi(idt)
+	fmt.Println(id)
+	fmt.Println(n)
 	cr.CharacterRace = Rc.Races[n]
+	fmt.Println(Rc.Races[n])
 	return
 }
 func (cr *Character) GetScores() {
@@ -119,18 +138,20 @@ func InteractiveCreateCharacter() {
 	Name, _ := reader.ReadString('\n')
 	Name = strings.Replace(Name, "\n", "", -1)
 	c.PlayerName = Name
+	promptN := "Character Name: "
+	readN := readline.ReadLine(&promptN)
+	c.CharacterName = readN
 	//fmt.Println(c)
 	Rc.List()
-	fmt.Print("Choose Race: ")
-	crace, _ := reader.ReadString('\n')
-	crace = strings.Replace(Name, "\n", "", -1)
-	c.ChooseRace(crace)
-	Cl.List()
-	fmt.Print("Choose Class: ")
+	promptR := "Choose Race: "
+	readR := readline.ReadLine(&promptR)
 
-	cclass, _ := reader.ReadString('\n')
-	cclass = strings.Replace(Name, "\n", "", -1)
-	c.ChooseClass(cclass)
+	c.ChooseRace(readR)
+	Cl.List()
+	promptC := "Choose Class: "
+	readC := readline.ReadLine(&promptC)
+
+	c.ChooseClass(readC)
 	c.GetScores()
 
 	e, err := json.Marshal(&c)

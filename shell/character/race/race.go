@@ -96,7 +96,7 @@ func (rc *Races) Load() {
 	return
 }
 
-func (rc *Races) RaceById(id string) {
+func (rc *Races) ById(id string) {
 
 	n, _ := strconv.Atoi(id)
 	fmt.Println(rc.Races[n]) //.Strength)

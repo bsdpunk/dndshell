@@ -53,6 +53,13 @@ var coms = commands.Commands{
 		Category:  "character",
 	},
 	{
+		Name:      "ListLevels",
+		ShortName: "ll",
+		Usage:     "Show Levels List",
+		Action:    character.Ls.List,
+		Category:  "character",
+	},
+	{
 		Name:      "ListRaces",
 		ShortName: "rl",
 		Usage:     "Show Class List",
@@ -74,6 +81,14 @@ var coms = commands.Commands{
 		Category:  "monsters",
 	},
 	{
+		Name:         "LevelsById",
+		ShortName:    "lid",
+		Usage:        "Show a Level by ID",
+		SubCommands:  character.LevelSubs,
+		StringAction: character.Ls.ById,
+		Category:     "character",
+	},
+	{
 		Name:         "AbilityById",
 		ShortName:    "aid",
 		Usage:        "Show an Ability by ID",
@@ -86,7 +101,7 @@ var coms = commands.Commands{
 		ShortName:    "rid",
 		Usage:        "Show a race by ID",
 		SubCommands:  character.RaceSubs,
-		StringAction: character.Rc.RaceById,
+		StringAction: character.Rc.ById,
 		Category:     "monsters",
 	},
 	{
