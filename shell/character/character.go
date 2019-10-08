@@ -6,6 +6,7 @@ import (
 	class "./class"
 	"./levels"
 	"./race"
+	"./spells"
 	"bufio"
 	"github.com/gobs/readline"
 	//	"./skill"
@@ -21,7 +22,7 @@ import (
 var Cl class.Classes
 var Rc race.Races
 var Ls levels.Levels
-
+var Sp spells.Spells
 var As ability.AbilityScores
 var Ms Monsters.Monsters
 var ClassSubs = commands.Commands{
@@ -40,6 +41,15 @@ var RaceSubs = commands.Commands{
 		Category:  "Character",
 	},
 }
+var SpellSubs = commands.Commands{
+	{
+		Name:      "SpellsById",
+		ShortName: "sid",
+		Usage:     "Get Spell By Id",
+		Category:  "Character",
+	},
+}
+
 var AbilitySubs = commands.Commands{
 	{
 		Name:      "AbilityById",
@@ -107,6 +117,7 @@ func Load() {
 	Ms.Load()
 	As.Load()
 	Ls.Load()
+	Sp.Load()
 }
 func (cr *Character) ChooseClass(id *string) {
 	idt := *id

@@ -60,6 +60,20 @@ var coms = commands.Commands{
 		Category:  "character",
 	},
 	{
+		Name:      "SpellBook",
+		ShortName: "sb",
+		Usage:     "Show Spells in a readable format",
+		Action:    character.Sp.SpellBook,
+		Category:  "character",
+	},
+	{
+		Name:      "ListSpells",
+		ShortName: "rl",
+		Usage:     "Show Spell List",
+		Action:    character.Sp.List,
+		Category:  "character",
+	},
+	{
 		Name:      "ListRaces",
 		ShortName: "rl",
 		Usage:     "Show Class List",
@@ -94,6 +108,14 @@ var coms = commands.Commands{
 		Usage:        "Show an Ability by ID",
 		SubCommands:  character.AbilitySubs,
 		StringAction: character.As.ById,
+		Category:     "monsters",
+	},
+	{
+		Name:         "SpellById",
+		ShortName:    "sid",
+		Usage:        "Show a race by ID",
+		SubCommands:  character.SpellSubs,
+		StringAction: character.Sp.ById,
 		Category:     "monsters",
 	},
 	{
