@@ -56,7 +56,7 @@ type Classes struct {
 }
 
 func (cl *Classes) Load() {
-	jsonFile, err := os.Open("../src/github.com/bsdpunk/dndshell/json/class.json")
+	jsonFile, err := os.Open(Home + "/go/src/github.com/bsdpunk/dndshell/json/class.json")
 
 	if err != nil {
 		fmt.Println(err)

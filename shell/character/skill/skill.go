@@ -18,7 +18,7 @@ type Skills struct {
 }
 
 func (rc *Skills) Load() {
-	jsonFile, err := os.Open("../src/github.com/bsdpunk/dndshell/json/skills.json")
+	jsonFile, err := os.Open(Home + "/go/src/github.com/bsdpunk/dndshell/json/skills.json")
 
 	if err != nil {
 		fmt.Println(err)

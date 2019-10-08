@@ -46,7 +46,7 @@ type Spells struct {
 }
 
 func (rc *Spells) Load() {
-	jsonFile, err := os.Open("../src/github.com/bsdpunk/dndshell/json/spells.json")
+	jsonFile, err := os.Open(Home + "/go/src/github.com/bsdpunk/dndshell/json/spells.json")
 
 	if err != nil {
 		fmt.Println(err)

@@ -28,7 +28,7 @@ func (q *Quotes) RandQ() {
 }
 
 func (q *Quotes) Load() {
-	jsonFile, err := os.Open("../src/github.com/bsdpunk/dndshell/json/quotes.json")
+	jsonFile, err := os.Open(Home + "/go/src/github.com/bsdpunk/dndshell/json/quotes.json")
 
 	if err != nil {
 		fmt.Println(err)
