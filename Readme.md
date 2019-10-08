@@ -14,8 +14,8 @@ go get github.com/bsdpunk/dndshell
 
 Tab Completion, and a workable history of how the shell was used in that instance are working. Listing many things like monsters, races, classes and Spells also work. The Return by Id work on these as well, however you must of course use Id and what is returned is the go struct, not an attractive display. A way to attractively display these things will be added. 
 
-![Install and start] (one.gif "Install Animation" )
-![Monster Commands] (two.gif "Use Animation" )
+![Install and start] (one.gif)
+![Monster Commands] (two.gif)
 
 
 ## Not working
