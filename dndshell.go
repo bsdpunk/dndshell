@@ -4,7 +4,7 @@ import "fmt"
 import "bufio"
 import "os"
 import "log"
-import "./shell"
+import "github.com/bsdpunk/dndshell/shell"
 import "reflect"
 
 func main() {
