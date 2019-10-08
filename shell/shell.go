@@ -5,6 +5,7 @@ import (
 	"./commands"
 	"./dice"
 	"./general"
+	"./quotes"
 	"fmt"
 	"github.com/gobs/readline"
 	"strings"
@@ -14,7 +15,7 @@ var found string = "no"
 var list []string
 var cr character.Character
 var matches = make([]string, 0, len(list))
-
+var Qu quotes.Quotes
 var coms = commands.Commands{
 	{
 		Name:      "Quit",
@@ -184,12 +185,14 @@ func NoAction() {
 }
 func Shell() {
 	character.Load()
+	Qu.Load()
 	for _, c := range coms {
 		list = append(list, c.Name)
 		list = append(list, c.ShortName)
 	}
 	//	cs := character.LoadClasses()
 	//ms := monsters.Load()
+	Qu.RandQ()
 	prompt := "> "
 	matches = make([]string, 0, len(list))
 L:
