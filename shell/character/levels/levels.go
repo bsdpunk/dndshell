@@ -163,7 +163,7 @@ type Levels struct {
 }
 
 func (rc *Levels) Load() {
-	jsonFile, err := os.Open("../../../json/levels.json")
+	jsonFile, err := os.Open("../src/github.com/bsdpunk/dndshell/json/levels.json")
 
 	if err != nil {
 		fmt.Println(err)
