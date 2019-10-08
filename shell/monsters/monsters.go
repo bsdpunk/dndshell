@@ -169,7 +169,7 @@ func (ms *Monsters) ByGuess(name string) {
 
 func (ms *Monsters) ByCR(chall string) {
 	parser, err := jsonql.NewStringQuery(ms.jsonString)
-	fchall := strconv.ParseFloat(chall)
+	fchall := strconv.ParseFloat(chall, 64)
 	if err != nil {
 		fmt.Println(err)
 		return
