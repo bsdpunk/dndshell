@@ -50,9 +50,16 @@ var AbilitySubs = commands.Commands{
 }
 
 var MonsterSubs = commands.Commands{
+
 	{
 		Name:      "MonsterById",
 		ShortName: "mid",
+		Usage:     "Get Monster By Id",
+		Category:  "",
+	},
+	{
+		Name:      "SBById",
+		ShortName: "sbid",
 		Usage:     "Get Monster By Id",
 		Category:  "",
 	},

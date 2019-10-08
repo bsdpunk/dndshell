@@ -3,6 +3,7 @@ package Monsters
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/tatsushid/go-prettytable"
 	"io/ioutil"
 	"os"
 	"strconv"
@@ -116,6 +117,32 @@ func (ms *Monsters) MonsterById(id string) {
 	n, _ := strconv.Atoi(id)
 	fmt.Println(ms.Monsters[n]) //.Strength)
 	return
+}
+
+func (ms *Monsters) SBById(id string) {
+	n, _ := strconv.Atoi(id)
+	ms.Monsters[n].StatBlock() //.Strength)
+	return
+}
+
+func (mo *Monster) StatBlock() {
+	fmt.Println("Name: ", mo.Name)
+	fmt.Println("ArmorClass: ", mo.ArmorClass)
+	fmt.Println("HP: ", mo.HitPoints)
+	tbl, err := prettytable.NewTable([]prettytable.Column{
+		{Header: "STR"},
+		{Header: "DEX", MinWidth: 6},
+		{Header: "CON"},
+		{Header: "INT"},
+		{Header: "WIS"},
+		{Header: "CHR"},
+	}...)
+	if err != nil {
+		panic(err)
+	}
+	tbl.Separator = " | "
+	tbl.AddRow(mo.Strength, mo.Dexterity, mo.Constitution, mo.Intelligence, mo.Wisdom, mo.Charisma)
+	tbl.Print()
 }
 
 func (ms *Monsters) Load() {
