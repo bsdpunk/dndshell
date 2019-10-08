@@ -167,7 +167,12 @@ L:
 		found = "no"
 		readline.SetCompletionEntryFunction(CompletionEntry)
 		readline.SetAttemptedCompletionFunction(nil)
+
+		//readline.SetHistoryPath("~/.dnd_history")
 		result := readline.ReadLine(&prompt)
+		hist := *result
+		readline.AddHistory(hist)
+		//result.HistoryEnable()
 		if result == nil {
 			break L
 		}

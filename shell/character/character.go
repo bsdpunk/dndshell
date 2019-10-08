@@ -140,7 +140,8 @@ func InteractiveCreateCharacter() {
 	c.PlayerName = Name
 	promptN := "Character Name: "
 	readN := readline.ReadLine(&promptN)
-	c.CharacterName = readN
+	cn := *readN
+	c.CharacterName = cn
 	//fmt.Println(c)
 	Rc.List()
 	promptR := "Choose Race: "
