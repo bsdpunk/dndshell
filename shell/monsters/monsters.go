@@ -150,7 +150,7 @@ func (mo *Monster) StatBlock() {
 	tbl.Print()
 }
 func (ms *Monsters) ByName(name string) {
-	parser, err := jsonql.NewStringQuery(jsonString)
+	parser, err := jsonql.NewStringQuery(ms.jsonString)
 	if err != nil {
 		fmt.Println(err)
 		return
