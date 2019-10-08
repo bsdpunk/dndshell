@@ -3,6 +3,7 @@ package Monsters
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/elgs/jsonql"
 	h "github.com/mitchellh/go-homedir"
 	"github.com/tatsushid/go-prettytable"
 	"io/ioutil"
@@ -103,7 +104,8 @@ type Speed struct {
 	Walk   string `json:"walk"`
 }
 type Monsters struct {
-	Monsters []Monster
+	Monsters   []Monster
+	jsonString string
 }
 
 func (ms *Monsters) List() {
@@ -147,7 +149,14 @@ func (mo *Monster) StatBlock() {
 	tbl.AddRow(mo.Strength, mo.Dexterity, mo.Constitution, mo.Intelligence, mo.Wisdom, mo.Charisma)
 	tbl.Print()
 }
-
+func (ms *Monsters) ByName(name string) {
+	parser, err := jsonql.NewStringQuery(jsonString)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println(parser.Query("name='" + name + "'"))
+}
 func (ms *Monsters) Load() {
 	jsonFile, err := os.Open(Home + "/go/src/github.com/bsdpunk/dndshell/json/monsters.json")
 
@@ -156,8 +165,8 @@ func (ms *Monsters) Load() {
 	}
 
 	defer jsonFile.Close()
-
 	byteValue, _ := ioutil.ReadAll(jsonFile)
+	ms.jsonString = string(byteValue)
 	if err := json.Unmarshal(byteValue, &ms.Monsters); err != nil {
 		fmt.Println(err)
 	}
