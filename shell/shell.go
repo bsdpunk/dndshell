@@ -157,7 +157,7 @@ var coms = commands.Commands{
 		ShortName:    "mbc",
 		Usage:        "Show a monster by CR",
 		SubCommands:  character.MonsterSubs,
-		StringAction: character.Ms.MonsterByCR,
+		StringAction: character.Ms.ByCR,
 		Category:     "monsters",
 	},
 	{
