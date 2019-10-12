@@ -14,6 +14,8 @@ import (
 var Home, _ = h.Dir()
 
 type Table struct {
+	Name  string
+	table map[int]string
 }
 
 type Tables struct {
@@ -34,12 +36,6 @@ func (ms *Tables) List() {
 func (ms *Tables) TableById(id string) {
 	n, _ := strconv.Atoi(id)
 	fmt.Println(ms.Tables[n]) //.Strength)
-	return
-}
-
-func (ms *Tables) SBById(id string) {
-	n, _ := strconv.Atoi(id)
-	ms.Tables[n].StatBlock() //.Strength)
 	return
 }
 
