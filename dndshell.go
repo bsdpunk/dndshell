@@ -19,7 +19,7 @@ func main() {
 			log.Println(err)
 		}
 	} else {
-		shell.Shell()
+		shell.Shell(os.Args)
 	}
 
 }

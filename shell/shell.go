@@ -207,7 +207,28 @@ func NoAction() {
 	fmt.Println("No action supplied with command")
 
 }
-func Shell() {
+func Shell(args []string) {
+	if len(args) > 0 {
+
+		words := args
+		if len(words) > 0 && coms.HasCommand(words[0]) {
+			cmd := coms.NameIs(words[0])
+			if len(words) == 1 {
+				if len(cmd.SubCommands) == 0 {
+					cmd.Action()
+				}
+
+			} else {
+				if cmd.SubCommands.HasCommand(words[1]) {
+					cmd.Action()
+				} else if !(cmd.SubCommands.HasCommand(words[1])) {
+					if cmd.StringAction != nil {
+						cmd.StringAction(words[1])
+					}
+				}
+			}
+		}
+	}
 	character.Load()
 	Qu.Load()
 	for _, c := range coms {
