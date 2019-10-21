@@ -112,7 +112,7 @@ func (ms *Monsters) List() {
 
 	for i := range ms.Monsters {
 		fmt.Print((ms.Monsters[i].Index - 1))
-		fmt.Println(" " + ms.Monsters[i].Name + " " + string(ms.Monsters[i].ChallengeRating))
+		fmt.Println(" "+ms.Monsters[i].Name, ms.Monsters[i].ChallengeRating)
 	}
 	return
 
