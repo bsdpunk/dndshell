@@ -217,9 +217,6 @@ func Shell(args []string) {
 	}
 	//	cs := character.LoadClasses()
 	//ms := monsters.Load()
-	Qu.RandQ()
-	prompt := "> "
-	matches = make([]string, 0, len(list))
 	if len(args) > 1 {
 		words := args
 		if len(words) > 1 && coms.HasCommand(words[1]) {
@@ -241,6 +238,10 @@ func Shell(args []string) {
 		}
 		os.Exit(0)
 	}
+	Qu.RandQ()
+	prompt := "> "
+	matches = make([]string, 0, len(list))
+
 L:
 	for {
 

@@ -180,7 +180,12 @@ func (ms *Monsters) ByCR(chall string) {
 		fmt.Println(err)
 		return
 	}
-	fmt.Println(parser.Query("challenge_rating=" + chall))
+	b, err := json.Marshal(parser.Query("challenge_rating=" + chall))
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println(string(b))
 }
 
 func (ms *Monsters) Load() {
