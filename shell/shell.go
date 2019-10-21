@@ -219,10 +219,10 @@ func Shell(args []string) {
 	//ms := monsters.Load()
 	if len(args) > 1 {
 		words := args
-		if len(words) > 1 && coms.HasCommand(words[1]) {
+		if coms.HasCommand(words[1]) {
 			cmd := coms.NameIs(words[1])
 			if len(words) == 2 {
-				if len(cmd.SubCommands) == 1 {
+				if len(cmd.SubCommands) == 0 {
 					cmd.Action()
 				}
 
