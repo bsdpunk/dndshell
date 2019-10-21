@@ -180,7 +180,8 @@ func (ms *Monsters) ByCR(chall string) {
 		fmt.Println(err)
 		return
 	}
-	b, err := json.Marshal(parser.Query("challenge_rating=" + chall))
+	inter, _ := parser.Query("challenge_rating=" + chall)
+	b, err := json.Marshal(inter)
 	if err != nil {
 		fmt.Println(err)
 		return
