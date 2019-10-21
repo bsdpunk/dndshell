@@ -120,7 +120,13 @@ func (ms *Monsters) List() {
 
 func (ms *Monsters) MonsterById(id string) {
 	n, _ := strconv.Atoi(id)
-	fmt.Println(ms.Monsters[n]) //.Strength)
+	b, err := json.Marshal(ms.Monsters[n])
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println(string(b))
+	//fmt.Println(ms.Monsters[n]) //.Strength)
 	return
 }
 

@@ -8,6 +8,7 @@ import (
 	"github.com/bsdpunk/dndshell/shell/general"
 	"github.com/bsdpunk/dndshell/shell/quotes"
 	"github.com/gobs/readline"
+	"os"
 	"strings"
 )
 
@@ -208,8 +209,18 @@ func NoAction() {
 
 }
 func Shell(args []string) {
+	character.Load()
+	Qu.Load()
+	for _, c := range coms {
+		list = append(list, c.Name)
+		list = append(list, c.ShortName)
+	}
+	//	cs := character.LoadClasses()
+	//ms := monsters.Load()
+	Qu.RandQ()
+	prompt := "> "
+	matches = make([]string, 0, len(list))
 	if len(args) > 1 {
-		//fmt.Println("HEYO", args, len(args))
 		words := args
 		if len(words) > 1 && coms.HasCommand(words[1]) {
 			cmd := coms.NameIs(words[1])
@@ -228,18 +239,8 @@ func Shell(args []string) {
 				}
 			}
 		}
+		os.Exit(0)
 	}
-	character.Load()
-	Qu.Load()
-	for _, c := range coms {
-		list = append(list, c.Name)
-		list = append(list, c.ShortName)
-	}
-	//	cs := character.LoadClasses()
-	//ms := monsters.Load()
-	Qu.RandQ()
-	prompt := "> "
-	matches = make([]string, 0, len(list))
 L:
 	for {
 
