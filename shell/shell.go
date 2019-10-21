@@ -209,7 +209,7 @@ func NoAction() {
 }
 func Shell(args []string) {
 	if len(args) > 0 {
-
+		fmt.Println("HEYO")
 		words := args
 		if len(words) > 0 && coms.HasCommand(words[0]) {
 			cmd := coms.NameIs(words[0])
