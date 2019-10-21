@@ -208,22 +208,22 @@ func NoAction() {
 
 }
 func Shell(args []string) {
-	if len(args) > 0 {
-		fmt.Println("HEYO", args, len(args))
+	if len(args) > 1 {
+		//fmt.Println("HEYO", args, len(args))
 		words := args
-		if len(words) > 0 && coms.HasCommand(words[0]) {
-			cmd := coms.NameIs(words[0])
-			if len(words) == 1 {
-				if len(cmd.SubCommands) == 0 {
+		if len(words) > 1 && coms.HasCommand(words[1]) {
+			cmd := coms.NameIs(words[1])
+			if len(words) == 2 {
+				if len(cmd.SubCommands) == 1 {
 					cmd.Action()
 				}
 
 			} else {
-				if cmd.SubCommands.HasCommand(words[1]) {
+				if cmd.SubCommands.HasCommand(words[2]) {
 					cmd.Action()
-				} else if !(cmd.SubCommands.HasCommand(words[1])) {
+				} else if !(cmd.SubCommands.HasCommand(words[2])) {
 					if cmd.StringAction != nil {
-						cmd.StringAction(words[1])
+						cmd.StringAction(words[2])
 					}
 				}
 			}
