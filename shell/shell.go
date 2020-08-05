@@ -2,7 +2,8 @@ package shell
 
 import (
 	"fmt"
-	"github.com/bsdpunk/dndshell/shell/character"
+	//"github.com/bsdpunk/dndshell/shell/character"
+	"./character"
 	"github.com/bsdpunk/dndshell/shell/commands"
 	"github.com/bsdpunk/dndshell/shell/dice"
 	"github.com/bsdpunk/dndshell/shell/general"
@@ -45,6 +46,13 @@ var coms = commands.Commands{
 		ShortName: "ic",
 		Usage:     "",
 		Action:    character.InteractiveCreateCharacter,
+		Category:  "general",
+	},
+	{
+		Name:      "CreateNPC",
+		ShortName: "in",
+		Usage:     "",
+		Action:    character.InteractiveCreateNPC,
 		Category:  "general",
 	},
 	{

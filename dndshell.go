@@ -5,9 +5,9 @@ import "bufio"
 import "os"
 import "log"
 
-import "github.com/bsdpunk/dndshell/shell"
+//import "github.com/bsdpunk/dndshell/shell"
 
-//import "./shell"
+import "./shell"
 
 func main() {
 

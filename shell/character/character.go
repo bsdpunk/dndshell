@@ -201,6 +201,29 @@ func (cr *Character) GetScores() {
 
 	return
 }
+func (cr *Character) GetNPCScores() {
+	var scores []string
+	var mods []int
+	for i := range As.AbilityScores {
+		fmt.Println("What is your " + As.AbilityScores[i].Name + " (B for Beefy, A for Average, W for Weak):")
+		reader := bufio.NewReader(os.Stdin)
+		score, _ := reader.ReadString('\n')
+		score = strings.Replace(score, "\n", "", -1)
+		//n, _ := strconv.Atoi(score)
+		if score == "b" || score == "B" {
+			mods = append(mods, 3)
+		} else if score == "a" || score == "A" {
+			mods = append(mods, 0)
+		} else {
+			mods = append(mods, -1)
+		}
+		scores = append(scores, score)
+	}
+	//cr.CharacterScores = scores
+	cr.CharacterModifiers = mods
+
+	return
+}
 
 func InteractiveCreateCharacter() {
 	c := Character{}
@@ -230,6 +253,45 @@ func InteractiveCreateCharacter() {
 	c.Level, _ = strconv.Atoi(*readL)
 	c.Prof = levToP[c.Level]
 	c.GetScores()
+
+	e, err := json.Marshal(&c)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println(string(e))
+	return
+
+}
+
+func InteractiveCreateNPC() {
+	c := Character{}
+	reader := bufio.NewReader(os.Stdin)
+	//fmt.Println(urlStr)
+	fmt.Print("Name: ")
+	Name, _ := reader.ReadString('\n')
+	Name = strings.Replace(Name, "\n", "", -1)
+	c.PlayerName = Name
+	promptN := "Character Name: "
+	readN := readline.ReadLine(&promptN)
+	cn := *readN
+	c.CharacterName = cn
+	//fmt.Println(c)
+	Rc.List()
+	promptR := "Choose Race: "
+	readR := readline.ReadLine(&promptR)
+
+	c.ChooseRace(readR)
+	Cl.List()
+	promptC := "Choose Class: "
+	readC := readline.ReadLine(&promptC)
+	c.ChooseClass(readC)
+
+	promptL := "What Level: "
+	readL := readline.ReadLine(&promptL)
+	c.Level, _ = strconv.Atoi(*readL)
+	c.Prof = levToP[c.Level]
+	c.GetNPCScores()
 
 	e, err := json.Marshal(&c)
 	if err != nil {
