@@ -71,3 +71,6 @@ cid             Clear           ic              ListClasses     ListSpells      
 8 Tiefling
 
 ```
+
+## NPCs
+You can create NPCs using in or CreateNPC, this is very beta.
