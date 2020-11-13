@@ -2,8 +2,8 @@ package shell
 
 import (
 	"fmt"
-	//"github.com/bsdpunk/dndshell/shell/character"
-	"./character"
+	"github.com/bsdpunk/dndshell/shell/character"
+	//"./character"
 	"github.com/bsdpunk/dndshell/shell/commands"
 	"github.com/bsdpunk/dndshell/shell/dice"
 	"github.com/bsdpunk/dndshell/shell/general"
