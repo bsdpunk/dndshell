@@ -1,6 +1,6 @@
 package attack
 
-import "../../dice"
+import "dndshell/shell/dice"
 
 //import "fmt"
 
